@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Review It</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">R</span><div><b>Review It</b><small>Don't just note it. Review it.</small></div></div>
+      <div class="step-label">01 · SOURCE</div>
+      <button id="videoPicker" class="upload-card">
+        <span class="upload-icon">＋</span>
+        <strong id="videoName">Choose a lecture video</strong>
+        <span id="videoMeta">MP4, MKV, MOV, AVI or WebM</span>
+      </button>
+
+      <div class="step-label">02 · PERFORMANCE</div>
+      <label>Processing mode
+        <select id="processingMode">
+          <option value="fast">Fast</option>
+          <option value="balanced" selected>Balanced · recommended</option>
+          <option value="accurate">Accurate</option>
+        </select>
+      </label>
+      <label>Speech model
+        <select id="model">
+          <option>tiny</option><option>base</option><option selected>small</option><option>medium</option><option>large-v3</option>
+        </select>
+      </label>
+      <div class="field-row">
+        <label>Language<input id="language" value="auto" placeholder="auto, en, fil"></label>
+        <label>Screen every<input id="interval" type="number" min="5" max="120" value="45"><span class="suffix">sec</span></label>
+      </div>
+      <label class="check"><input id="useGpu" type="checkbox"><span></span>NVIDIA GPU</label>
+      <label class="check"><input id="useOllama" type="checkbox"><span></span>Detailed screen AI (slower)</label>
+      <label id="ollamaWrap" class="hidden">Ollama model<input id="ollamaModel" value="gemma3:4b"></label>
+
+      <button id="startBtn" class="primary" disabled><span>Start transcription</span><b>→</b></button>
+      <button id="cancelBtn" class="secondary hidden">Cancel processing</button>
+      <p class="privacy">● Files stay on this computer</p>
+    </aside>
+
+    <main>
+      <header><div><p class="eyebrow">REVIEW IT</p><h1>Don't just note it.<br><em>Review it.</em></h1></div><div id="statusPill" class="status-pill">Ready</div></header>
+
+      <section class="progress-card">
+        <div class="progress-top"><div><span id="stage">Waiting for a video</span><small id="status">Select a lecture video to begin.</small></div><strong id="percent">0%</strong></div>
+        <div class="track"><div id="progressBar"></div></div>
+        <div class="stages"><span class="active">Audio</span><span>Screen</span><span>Combine</span><span>Ready</span></div>
+      </section>
+
+      <section class="transcript-card">
+        <div class="card-head"><div><p class="eyebrow">LIVE OUTPUT</p><h2 id="outputTitle">Transcript</h2></div><div class="actions"><button id="reviewerBtn" disabled>✦ Create Reviewer</button><button id="wordBtn" disabled>↓ Word</button><button id="pdfBtn" disabled>↓ PDF</button></div></div>
+        <div class="tabs"><button data-mode="Combined context" class="active">Combined</button><button data-mode="Audio only">Audio only</button><button data-mode="Screen context">Screen context</button><button data-mode="Reviewer">Reviewer</button></div>
+        <div id="emptyState" class="empty"><div class="wave">▂▄▆█▆▄▂</div><h3>Your transcript will appear here</h3><p>Audio appears live. Screen context is added in the next stage.</p></div>
+        <pre id="transcript" class="hidden"></pre>
+      </section>
+      <div id="toast"></div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

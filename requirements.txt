@@ -1,0 +1,9 @@
+faster-whisper>=1.1,<2
+av>=11,<19
+rapidocr>=3.10,<4
+onnxruntime>=1.20,<2
+python-docx>=1.1,<2
+reportlab>=4.2,<5
+Pillow>=10.4,<13
+requests>=2.32,<3
+pywebview>=5.4,<7
